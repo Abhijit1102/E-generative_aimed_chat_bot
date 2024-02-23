@@ -42,7 +42,7 @@ class ChromaDBInitiate:
             logging.error(f"Error during ChromaDB initialization: {e}")
             print(f"Error during ChromaDB initialization: {e}")
 
-# Example usage:
-#if __name__ == "__main__":
-#    chromadb_instance = ChromaDBInitiate()
-#    chromadb_instance.initialize_chromadb()
+ # Example usage:
+if __name__ == "__main__":
+    chromadb_instance = ChromaDBInitiate()
+    chromadb_instance.initialize_chromadb()

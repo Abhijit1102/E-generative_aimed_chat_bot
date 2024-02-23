@@ -15,13 +15,13 @@ import chromadb
 app = Flask(__name__)
 
 try:
-    # Initialize ChromaDB client and collection
+    #Initialize ChromaDB client and collection
     client = chromadb.PersistentClient(path="data/")
     collection = client.get_collection(name="medchat")
 
     # Initialize PromptTemplate, CTransformers, and embeddings
     PROMPT = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
-    llm = CTransformers(model="models\llama-2-7b-chat.ggmlv3.q4_0.bin",
+    llm = CTransformers(model=r"models\llama-2-7b-chat.ggmlv3.q4_0.bin",
                         model_type="llama",
                         config={'max_new_tokens': 512, 'temperature': 0.5})
     embeddings = download_hugging_face_embeddings()
@@ -29,7 +29,7 @@ try:
     def embedding_query(query):
         result = collection.query(
             query_embeddings=embeddings.embed_query(query),
-            n_results=3
+            n_results=2
         )
         context = result["documents"][0]
         return context
@@ -48,14 +48,13 @@ def index():
 def chat():
     try:
         question = request.form["msg"]
-
+        print("question : ", question)
         context = embedding_query(question)
-
-        inputs = {"context": context, "question": question}
-
+        result = {"context": context, "question": question}
         result = llm_chain(inputs)
         logging.info(f"Response: {result['text']}")
-        return str(result["text"])
+        print(f"Response: {result['context']}")
+        return str(result["context"])
 
     except Exception as e:
         logging.error(f"Error during chat processing: {e}")
