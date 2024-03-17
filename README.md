@@ -28,4 +28,14 @@ link : https://drive.google.com/file/d/1iZA0pOwd9MR7r32AuBbkqjQvIKbeqAdW/view?us
 
 2. How to run app
    ```bash
-   python app.py     
+   python app.py  
+
+3. Access the Application:
+
+- Open your web browser and navigate to http://localhost:8000 to access the chat interface.
+
+# Usage
+- Enter your medical query in the chat interface and press enter.
+- The application will provide context-aware responses based on your query.
+
+      
